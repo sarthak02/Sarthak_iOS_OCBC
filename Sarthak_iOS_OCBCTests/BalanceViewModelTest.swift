@@ -1,0 +1,49 @@
+//
+//  BalanceViewModelTest.swift
+//  Sarthak_iOS_OCBC
+//
+//  Created by sarthak on 21/3/22.
+//
+
+import XCTest
+@testable import Sarthak_iOS_OCBC
+
+class BalanceViewModelTest: XCTestCase {
+
+    var viewModel: BalanceViewModel!
+    override func setUpWithError() throws {
+        viewModel = BalanceViewModel()
+    }
+
+    override func tearDownWithError() throws {
+        viewModel = nil
+    }
+
+    func testApiSuccessscenario() throws {
+        var isSuccessCalled = false
+        self.viewModel.bindControllerForSuccess = {
+            isSuccessCalled = true
+            XCTAssertNotNil(self.viewModel.balanceData, "balance data should not be nil")
+            XCTAssertEqual(self.viewModel.balanceData?.status, "success", "status should be true")
+            XCTAssertNotNil(self.viewModel.balanceData?.balance, "balance should not be nil")
+            XCTAssertTrue(self.viewModel.canSendAmount(amount: 500.0), "it should be true")
+            XCTAssertFalse(self.viewModel.canSendAmount(amount: 500000.0), "it should be true")
+        }
+        let apiRequest = MockAPIRequest.init(resource: BalanceDataResource())
+        apiRequest.load { data in
+            self.viewModel.balanceData = data
+        } onError: { error in }
+        XCTAssertTrue(isSuccessCalled, "isSuccessCalled should be true")
+    }
+    
+    func testApiErrorScenario() throws {
+        var isErrorCalled = false
+    
+        self.viewModel.bindControllerForError = { errorMessage in
+            isErrorCalled = true
+        }
+        self.viewModel.balanceData = nil
+        XCTAssertTrue(isErrorCalled, "isErrorCalled should be true")
+    }
+
+}

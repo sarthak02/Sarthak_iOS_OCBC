@@ -1,0 +1,35 @@
+//
+//  PrimaryButton.swift
+//  Sarthak_iOS_OCBC
+//
+//  Created by sarthak on 21/3/22.
+//
+import UIKit
+public class PrimaryButton: UIButton {
+    public init() {
+        super.init(frame: .zero)
+        configure()
+    }
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    private func configure() {
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFont.Weight.semibold)
+        self.layer.cornerRadius = 4.0
+        self.clipsToBounds = true
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .disabled)
+        self.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: .highlighted)
+        self.backgroundColor = UIColor.blue
+    }
+    public override var isEnabled: Bool {
+        didSet {
+            self.backgroundColor = (self.isEnabled) ? UIColor.blue : UIColor.blue.withAlphaComponent(0.5)
+        }
+    }
+}
