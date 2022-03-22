@@ -22,7 +22,7 @@ enum ApiRequestUrl: String {
 }
 /// Api manager for holding api constants
 struct APIManager {
-    static let baseUrl = "http://green-thumb-64168.uc.r.appspot.com"
+    static let baseUrl = "https://green-thumb-64168.uc.r.appspot.com"
     static var defaultTimeoutInterval: TimeInterval = 60
 }
 
