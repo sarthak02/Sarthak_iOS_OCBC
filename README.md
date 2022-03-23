@@ -33,5 +33,5 @@
 5. User is able to make a transfer  - **Done**
 6. Refresh  - **Done**
 7. Code Design - **Done** (inline comments, documentation, code sepration between Ui, business logic, server interaction )
-8. UI  - **Done** (Implemented for reusable ui component - Button, textfeild, textview, transaction activity view, balance display view)
+8. UI  - **Done** (Implemented for reusable ui component)
 9. Implement the Unit Test cases   - **Done**
